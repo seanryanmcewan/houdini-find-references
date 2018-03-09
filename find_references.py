@@ -1,7 +1,7 @@
 class find_references:
 
     def __init__(self, kwargs):
-	   self.kwargs = kwargs
+           self.kwargs = kwargs
 
     # MAIN FUNCTION FOR FINDING NODES REFERENCING THE CURRENT NODE
     def findReferences(self, sel):   
@@ -135,8 +135,11 @@ class find_references:
         
         # IF CTRL-CLICKED
         if self.kwargs['ctrlclick']:
-	       self.deleteNodeWithReferenceCheck()
+               self.deleteNodeWithReferenceCheck()
         
         # IF CLICKED WITH NO MODIFIER
         else:
-	       self.printReferences()
+               self.printReferences()
+               
+fr = find_references(kwargs)
+fr.run()
