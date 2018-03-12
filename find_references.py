@@ -1,9 +1,9 @@
-class find_references:
+class find_references(object):
 
     def __init__(self, kwargs):
            self.kwargs = kwargs
 
-    # MAIN FUNCTION FOR FINDING NODES REFERENCING THE CURRENT NODE
+    # FINDS NODES REFERENCING THE INPUT NODE
     def findReferences(self, sel):   
         
         # INITIALIZE VARIABLES
@@ -14,6 +14,7 @@ class find_references:
 
         # CHECK PARAMETERS OF ALL NODES FOR REFERENCES TO THIS NODE
         for n in root.allSubChildren():
+            
             # IGNORE HIDDEN IPR CAMERA
             if n.path() != "/obj/ipr_camera":
                 
@@ -60,6 +61,7 @@ class find_references:
         sels = hou.selectedNodes()
         
         for sel in sels:
+            
             # FIND REFERENCES
             node_ref_list, parm_ref_list = self.findReferences(sel)
             
@@ -98,37 +100,37 @@ class find_references:
         sels = hou.selectedNodes()        
         
         # PRINT START
-        print "\n----------------------------------------------------"
-        print "CHECKING SELECTED NODES FOR NODE AND PARAMETER REFERENCES"
+        print("\n----------------------------------------------------")
+        print("CHECKING SELECTED NODES FOR NODE AND PARAMETER REFERENCES")
 
         for sel in sels:
             # PRINT NODE PATH
-            print "\n##### %s #####" % sel.path()
+            print("\n##### {0} #####".format(sel.path()))
             
             # FIND REFERENCES
             node_ref_list, parm_ref_list = self.findReferences(sel)
             
             # PRINT NODE REFERENCES
             if node_ref_list:
-                print '\n--THE FOLLOWING NODE PARAMETERS ARE REFERENCING "%s":' % sel.path()
+                print('\n--THE FOLLOWING NODE PARAMETERS ARE REFERENCING "{0}":'.format(sel.path()))
                 for node in node_ref_list:
                     print node
 
             # PRINT PARAMETER REFERENCES
             if parm_ref_list:
-                print '\n--THE FOLLOWING PARAMETERS ARE BEING REFERENCED FROM "%s":' % sel.path()
+                print('\n--THE FOLLOWING PARAMETERS ARE BEING REFERENCED FROM "{0}":'.format(sel.path()))
                 for parm in parm_ref_list:
                     ref_parm_paths = []
                     for ref_parm in parm[1]:
                         ref_parm_paths.append(ref_parm.path())
-                    print '"%s" is being referenced by: "%s"' % (parm[0].name(), str(', '.join(ref_parm_paths)))    
+                    print('"{0}" is being referenced by: "{1}"'.format((parm[0].name(), str(', '.join(ref_parm_paths)))))
                     
             # IF NO NODE OR PARAMETER REFERENCES
             if not node_ref_list and not parm_ref_list:
-                print '--NO NODE OR PARAMETER REFERENCES DETECTED ON "%s"' % sel.path()
+                print('--NO NODE OR PARAMETER REFERENCES DETECTED ON "{0}"'.format(sel.path()))
 
         # PRINT END
-        print "\n----------------------------------------------------"     
+        print("\n----------------------------------------------------")
 
     # RUN, CHECKING FOR MODIFIERS
     def run(self):
