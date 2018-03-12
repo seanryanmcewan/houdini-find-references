@@ -77,17 +77,17 @@ class find_references(object):
                 if node_ref_list:
                     list_str = "\nNode References:\n"
                     for node in node_ref_list:
-                        list_str = "%s %s\n" % (list_str, node)
+                        list_str = "{0} {1}\n".format(list_str, node)
                     
                 # LIST PARAMETER REFERENCES
                 if parm_ref_list:
                     list_str += "\n\nParameter References:\n"
                     for parm in parm_ref_list:
                         for ref_parm in parm[1]:
-                            list_str = "%s %s\n" % (list_str, ref_parm.path())
+                            list_str = "{0} {1}\n".format(list_str, ref_parm.path())
                             
                 # DISPLAY CONFIRMATION MESSAGE
-                do_destroy = hou.ui.displayMessage("%s contains the following references:\n%s\nAre you sure you want to delete it?" % (sel.name(), list_str) , buttons=('Cancel','OK'),close_choice=0)
+                do_destroy = hou.ui.displayMessage("{0} contains the following references:\n{1}\nAre you sure you want to delete it?".format(sel.name(), list_str) , buttons=('Cancel','OK'),close_choice=0)
                 
                 # IF CONFIRMED, DESTROY NODE
                 if do_destroy:
