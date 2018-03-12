@@ -1,10 +1,17 @@
 class find_references(object):
-
+    """
+    Shelf tool to find all nodes or parameters referencing the selected nodes or any of their parameters. By default, prints
+    a list in a shell/terminal. If ctrl-clicked, deletes the selected nodes, with a confirmation dialog if any
+    references are found.
+    """
+    
     def __init__(self, kwargs):
            self.kwargs = kwargs
 
-    # FINDS NODES REFERENCING THE INPUT NODE
     def findReferences(self, sel):   
+        """
+        Find nodes or parameters referencing the input node or any of its parameters.
+        """
         
         # INITIALIZE VARIABLES
         z = 0
@@ -53,9 +60,10 @@ class find_references(object):
 
         return node_ref_list, parm_ref_list
 
-
-    # DELETES THE SELECTED NODES, WITH A CONFIRMATION POP-UP IF ANY REFERENCES ARE FOUND
     def deleteNodeWithReferenceCheck(self):
+        """
+        Deletes the selected nodes, with a confirmation pop-up if an references are found.
+        """
         
         # INITIALIZE VARIABLES        
         sels = hou.selectedNodes()
@@ -93,8 +101,10 @@ class find_references(object):
                 if do_destroy:
                     sel.destroy()
     
-    # PRINT REFERENCES IN SHELL/TERMINAL
     def printReferences(self):  
+        """
+        Prints a list of nodes or parameters referencing the selected nodes in a shell/terminal.
+        """
         
         # INITIALIZE VARIABLES        
         sels = hou.selectedNodes()        
@@ -134,7 +144,10 @@ class find_references(object):
 
     # RUN, CHECKING FOR MODIFIERS
     def run(self):
-        
+        """ 
+        If ctrl-clicked, delete node with reference check.
+        Otherwise, print a list of references.
+        """
         # IF CTRL-CLICKED
         if self.kwargs['ctrlclick']:
                self.deleteNodeWithReferenceCheck()
