@@ -11,6 +11,12 @@ class find_references(object):
     def findReferences(self, sel):   
         """
         Find nodes or parameters referencing the input node or any of its parameters.
+        
+        Arguments:
+        sel (hou.Node): Node to check for references on.
+        
+        Returns:
+        list: [list, list]: Returns list of lists. First list is all nodes references, second list is all parameter references.
         """
         
         # INITIALIZE VARIABLES
