@@ -20,7 +20,6 @@ class find_references(object):
         """
         
         # INITIALIZE VARIABLES
-        z = 0
         node_ref_list = []
         parm_ref_list = []
         root = hou.node("/")
@@ -33,9 +32,9 @@ class find_references(object):
                 
                 # CHECK ALL PARMS, AND PROCEED IF PARM TYPE IS STRING AND IS A NODE REFERENCE, AND HAS ANY SET VALUE
                 for p in n.parms():
-                    if p.parmTemplate().type() == hou.parmTemplateType.String:
-                        if p.parmTemplate().stringType() == hou.stringParmType.NodeReference:
-                            if p.eval():
+                    if all([p.parmTemplate().type() == hou.parmTemplateType.String,
+                            p.parmTemplate().stringType() == hou.stringParmType.NodeReference,
+                            p.eval() ]):                                
                                 
                                 # GET PATH CURRENT PARM IS REFERENCING
                                 try:
