@@ -154,9 +154,13 @@ class find_references(object):
         If ctrl-clicked, delete node with reference check.
         Otherwise, print a list of references.
         """
-        # IF CTRL-CLICKED
-        if self.kwargs['ctrlclick']:
+
+        # TEST IF ctrlclick IN self.kwargs
+        if 'ctrlclick' in self.kwargs:
+            # TEST IF ctrlclick HAS A VALUE
+            if self.kwargs['ctrlclick']:
                self.deleteNodeWithReferenceCheck()
+
         
         # IF CLICKED WITH NO MODIFIER
         else:
